@@ -1,8 +1,11 @@
 {
-  "name": "nodejs-cli-mailbreach",
+  "name": "terminal-mailbreachchecker",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "bin": {
+    "pwned": "index.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -18,6 +21,9 @@
   "homepage": "https://github.com/olivierk95/nodejs_cli#readme",
   "dependencies": {
     "axios": "^0.18.0",
-    "email-validator": "^2.0.4"
+    "chalk": "^2.4.2",
+    "email-validator": "^2.0.4",
+    "figlet": "^1.2.1",
+    "ora": "^3.0.0"
   }
 }

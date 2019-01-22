@@ -4,6 +4,7 @@ const validator = require("email-validator");
 const axios = require("axios");
 
 //check if email is valid
+
 var account = process.argv[2];
 var validEmail = validator.validate(account);
 
@@ -11,10 +12,11 @@ if(validEmail) {
     axios({
         method:'get',
         url:`https://haveibeenpwned.com/api/v2/breachedaccount/${account}`,
-        headers: {"User-Agent": "nodejs-cli-mailbreach"},
+        headers: {"User-Agent": "terminal-mailbreachchecker"},
     })
     .then(function (response) {
-        console.log(response.data);
+        var breachArray = response.data.map(data=>data.Name);
+        console.log(breachArray.toString());
     })
     .catch (function (error) {
         const status = error.response&&error.response.status;
@@ -44,3 +46,16 @@ if(validEmail) {
 } else if(!validEmail) {
     console.log("Invalid mail address, try again mate!")
 };
+
+
+
+// //By version in URL:
+// GET "https://haveibeenpwned.com/api/v2/breachedaccount/{account}"
+
+// //By api-version header:
+// GET "https://haveibeenpwned.com/api/breachedaccount/{account}"
+// api-version: 2
+
+// //By content negotiation:
+// GET "https://haveibeenpwned.com/api/breachedaccount/{account}"
+// Accept: application/vnd.haveibeenpwned.v2+json
