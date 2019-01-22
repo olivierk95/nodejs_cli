@@ -4,6 +4,7 @@ const validator = require("email-validator");
 const axios = require("axios");
 const chalk = require('chalk');
 const ora = require('ora');
+var figlet = require('figlet');
 
 //check if email is valid
 var account = process.argv[2];
@@ -37,6 +38,15 @@ if (validEmail) {
             var breachArray = response.data.map(data => data.Name);
             console.log(chalk.white.bgRed(breachArray.toString()));
 
+            figlet('Looser!!', function(err, data) {
+                if (err) {
+                    console.log('Something went wrong...');
+                    console.dir(err);
+                    return;
+                }
+                console.log(data)
+            });
+
         })
 
         .catch(function (error) {
@@ -64,6 +74,16 @@ if (validEmail) {
                     spinner.succeed();
                     
                     console.log(chalk.white.bgGreen("No breach, you are good brother!"));
+
+                    figlet('Winner!!', function(err, data) {
+                        if (err) {
+                            console.log('Something went wrong...');
+                            console.dir(err);
+                            return;
+                        }
+                        console.log(data)
+                    });
+
                     break;
 
                 case 429:
